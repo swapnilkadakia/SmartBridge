@@ -1,0 +1,164 @@
+[
+    {
+        "id": "84f9b0e5.cb99c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "da4c22c1.55e48",
+        "type": "ui_form",
+        "z": "84f9b0e5.cb99c",
+        "name": "",
+        "label": "",
+        "group": "7e9da29d.ad9eac",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Enter your input",
+                "value": "text",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "text": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "x": 220,
+        "y": 260,
+        "wires": [
+            [
+                "85605b08.0701b8"
+            ]
+        ]
+    },
+    {
+        "id": "b5c3d77f.5f1798",
+        "type": "function",
+        "z": "84f9b0e5.cb99c",
+        "name": "",
+        "func": "msg.payload=msg.payload.output.text[0];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 770,
+        "y": 180,
+        "wires": [
+            [
+                "75e84c9c.96d274"
+            ]
+        ]
+    },
+    {
+        "id": "49b674a3.64d23c",
+        "type": "watson-conversation-v1",
+        "z": "84f9b0e5.cb99c",
+        "name": "CustomerCare Help Desk",
+        "workspaceid": "b226d531-8dcc-4274-abe1-36ad265fbb9c",
+        "multiuser": false,
+        "context": false,
+        "empty-payload": false,
+        "service-endpoint": "https://gateway-lon.watsonplatform.net/assistant/api",
+        "timeout": "",
+        "optout-learning": false,
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "8f1d324f.2f9f",
+                "b5c3d77f.5f1798"
+            ]
+        ]
+    },
+    {
+        "id": "c8dd349a.1d3158",
+        "type": "ui_text",
+        "z": "84f9b0e5.cb99c",
+        "group": "7e9da29d.ad9eac",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "You",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "x": 510,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8f1d324f.2f9f",
+        "type": "debug",
+        "z": "84f9b0e5.cb99c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 790,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "75e84c9c.96d274",
+        "type": "ui_text",
+        "z": "84f9b0e5.cb99c",
+        "group": "7e9da29d.ad9eac",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Bot",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "x": 910,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "85605b08.0701b8",
+        "type": "function",
+        "z": "84f9b0e5.cb99c",
+        "name": "",
+        "func": "msg.payload=msg.payload.text;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "49b674a3.64d23c",
+                "c8dd349a.1d3158"
+            ]
+        ]
+    },
+    {
+        "id": "7e9da29d.ad9eac",
+        "type": "ui_group",
+        "z": "",
+        "name": "ChatBot",
+        "tab": "238e9d6e.4719b2",
+        "order": 1,
+        "disp": true,
+        "width": 15,
+        "collapse": false
+    },
+    {
+        "id": "238e9d6e.4719b2",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Customer Care Help Desk",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
